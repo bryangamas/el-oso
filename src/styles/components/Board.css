@@ -1,0 +1,36 @@
+.Board {
+  width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Board__row {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+}
+
+.Board__cell {
+  display: inline-block;
+  height: 5rem;
+  font-size: 3.5rem;
+  text-align: center;
+  background-color: lightgray;
+  flex-basis: 20%;
+  border: black solid 2px
+}
+
+.Board__cell-empty {
+  background-color: gray;
+}
+
+@media (min-width: 700px) {
+  .Board {
+    width: 630px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .Board__cell {
+    height: 8rem;
+  }
+}
