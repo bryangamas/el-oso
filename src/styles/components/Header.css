@@ -1,0 +1,18 @@
+.Header {
+  display: flex;
+  justify-content: center;
+}
+
+.Header__title {
+  color: black;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  font-size: 4.5rem;
+}
+
+@media (min-width: 700px) {
+  .Header__title {
+    font-size: 6rem;
+  }
+}

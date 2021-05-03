@@ -2,6 +2,8 @@
   width: 90vw;
   margin-left: auto;
   margin-right: auto;
+  background-color: black;
+  border: 1px solid black;
 }
 
 .Board__row {
@@ -11,17 +13,28 @@
 }
 
 .Board__cell {
-  display: inline-block;
   height: 5rem;
   font-size: 3.5rem;
-  text-align: center;
-  background-color: lightgray;
+  background-color: rgb(180, 180, 180);
   flex-basis: 20%;
-  border: black solid 2px
+  /* border: black solid 2px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px;
 }
 
 .Board__cell-empty {
   background-color: gray;
+  cursor: pointer;
+}
+
+.Board__cell-player-1 {
+  background-color: gold;
+}
+
+.Board__cell-player-2 {
+  background-color: turquoise;
 }
 
 @media (min-width: 700px) {
@@ -32,5 +45,6 @@
   }
   .Board__cell {
     height: 8rem;
+    font-size: 6rem;
   }
 }
