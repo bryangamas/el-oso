@@ -4,9 +4,10 @@
 }
 
 .Header__title {
+  font-family: Arial, Helvetica, sans-serif;
   color: black;
   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
   font-size: 4.5rem;
 }

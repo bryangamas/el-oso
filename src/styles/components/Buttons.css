@@ -1,0 +1,15 @@
+.Buttons {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+}
+
+.Buttons__content {
+  font-size: 6rem;
+  background-color: gray;
+  padding: 0 3rem;
+  margin: 1rem auto;
+  border-radius: 10px;
+  border: 3px solid black;
+}

@@ -37,14 +37,20 @@
   background-color: turquoise;
 }
 
+@media (min-width: 500px) {
+  .Board__cell {
+    height: 7rem;
+    font-size: 5rem;
+  }
+}
+
 @media (min-width: 700px) {
   .Board {
     width: 630px;
-    margin-left: auto;
-    margin-right: auto;
   }
   .Board__cell {
     height: 8rem;
     font-size: 6rem;
+    margin: 3px;
   }
 }
