@@ -22,6 +22,7 @@
   align-items: center;
   justify-content: center;
   margin: 2px;
+  box-shadow: inset 0px 0px 5px rgb(59, 59, 59);
 }
 
 .Board__cell-empty {

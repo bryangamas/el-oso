@@ -8,6 +8,7 @@
   justify-content: space-around;
   border-radius: 15px;
   border: 4px solid black;
+  font-family: monospace;
 }
 
 .Score__content {
@@ -17,12 +18,12 @@
 }
 
 .Score__content__name {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 300;
 }
 
 .Score__content__points {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 

@@ -20,7 +20,6 @@ const cellsWon = [
 ];
 
 const Board = () => {
-
   const cellClass = (cell, cellWon) => {
     if (!cell) {
       return "Board__cell-empty";
@@ -37,22 +36,18 @@ const Board = () => {
 
   return (
     <main className="Board">
-      {board.map((row, i) => {
-        return (
-          <div key={i} className="Board__row">
-            {row.map((cell, j) => {
-              return (
-                <div
-                  key={i + j}
-                  className={`Board__cell ${cellClass(cell, cellsWon[i][j])}`}
-                >
-                  {cell === 0 ? "" : cell}
-                </div>
-              );
-            })}
-          </div>
-        );
-      })}
+      {board.map((row, i) => (
+        <div key={i} className="Board__row">
+          {row.map((cell, j) => (
+            <div
+              key={i + j}
+              className={`Board__cell ${cellClass(cell, cellsWon[i][j])}`}
+            >
+              {cell === 0 ? "" : cell}
+            </div>
+          ))}
+        </div>
+      ))}
     </main>
   );
 };
