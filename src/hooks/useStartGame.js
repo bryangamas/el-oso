@@ -1,17 +1,14 @@
 import { useState } from "react";
+import { newMatrix, calculatePoints } from "../util/points"
 
 const useStartGame = () => {
   const boardDim = 6;
 
   const initialState = {
-    board: Array(boardDim)
-      .fill(0)
-      .map(() => Array(boardDim).fill(0)),
-    cellsWon: Array(boardDim)
-      .fill(0)
-      .map(() => Array(boardDim).fill(0)),
+    board: newMatrix(boardDim),
+    cellsWon: newMatrix(boardDim),
     selectedLetter: undefined,
-    turn: 0,
+    turn: 2,
   };
 
   const [state, setState] = useState(initialState);
@@ -31,22 +28,21 @@ const useStartGame = () => {
 
   const putLetterIn = (i, j) => () => {
     let { board, selectedLetter, turn } = state;
-    console.log(i, j, board);
-    if (board[i][j] === 0 && turn === 1) {
+    if (board[i][j] === 0 && turn === 2) {
       board[i][j] = selectedLetter;
       checkEarnedPoints(i, j);
     }
   };
 
   const checkEarnedPoints = (i, j) => {
-    let { board, turn } = state;
-    let earnedPoints = 0;
-    if (earnedPoints > 0) {
-      turn = turn === 0 ? 1 : 0;
-    }
+    let { turn } = state;
+    let {earnedPoints, cellsWon} = calculatePoints(i, j, state);
+    // if (earnedPoints === 0) {
+    //   turn = turn === 1 ? 2 : 1;
+    // }
     setState({
       ...state,
-      board,
+      cellsWon,
       turn,
     });
   };
