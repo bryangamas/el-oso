@@ -1,43 +1,35 @@
 import { useEffect, useState } from "react";
-import { calculatePoints, evaluateMove,  } from "../util/pointsUtils"
-import { randomItem, newMatrix } from "../util/arrayUtils"
+import { calculatePoints, evaluateMove } from "../util/pointsUtils";
+import { randomItem, newMatrix } from "../util/arrayUtils";
 
 const useStartGame = (boardDim = 6, firstTurn = 2) => {
-
   const initialState = {
     board: newMatrix(boardDim),
     cellsWon: newMatrix(boardDim),
     selectedLetter: undefined,
     turn: firstTurn,
-    points: {1:0, 2:0}
+    points: { 1: 0, 2: 0 },
+    moves: 0,
   };
 
   const [state, setState] = useState(initialState);
 
   useEffect(() => {
+    const checkFinishGame = () => {
+      let { moves } = state;
+      return moves === boardDim * boardDim ? true : false;
+    };
 
-    const checkFinishGame = ()=>{
-      let {board} = state;
-      for (let row of board){
-        for (let cell of row){
-          if(cell === 0){
-            return false
-          }
-        }
-      }
-      return true
-    }
-
-    if(checkFinishGame()){
-      console.log("Game over, hdp")
+    if (checkFinishGame()) {
+      console.log("Game over, hdp");
       return;
     }
 
-    if(state.turn === 1){
-      computerMove()
+    if (state.turn === 1) {
+      computerMove();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
 
   const changeSelectedLetter = (selectedLetter) => () => {
     setState({
@@ -46,12 +38,12 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
     });
   };
 
-  const putLetterIn = (i, j, selectedLetter, player=2) => () => {
+  const putLetterIn = (i, j, selectedLetter, player = 2) => () => {
     let { board, turn } = state;
-    if(!selectedLetter){
+    if (!selectedLetter) {
       selectedLetter = state.selectedLetter;
     }
-    if(selectedLetter){
+    if (selectedLetter) {
       if (board[i][j] === 0 && turn === player) {
         board[i][j] = selectedLetter;
         checkEarnedPoints(i, j, selectedLetter);
@@ -60,8 +52,12 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
   };
 
   const checkEarnedPoints = (i, j, selectedLetter) => {
-    let { turn, points } = state;
-    let {earnedPoints, cellsWon} = calculatePoints({...state, selectedLetter}, i, j);
+    let { turn, points, moves } = state;
+    let { earnedPoints, cellsWon } = calculatePoints(
+      { ...state, selectedLetter },
+      i,
+      j
+    );
     points[turn] += earnedPoints;
     if (earnedPoints === 0) {
       turn = turn === 1 ? 2 : 1;
@@ -70,40 +66,46 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
       ...state,
       cellsWon,
       turn,
+      moves: moves + 1,
     });
   };
 
   const computerMove = () => {
-    let {board} = state;
+    let { board } = state;
     let possibleMoves = [];
     let randomMoves = [];
-    for (let i=0; i<boardDim; i++) {
-      for (let j=0; j<boardDim; j++){
-        if(board[i][j] === 0){
-          for(let selectedLetter of ["S", "O"]){
-            let moveValue = evaluateMove(board, i, j, selectedLetter)
+    for (let i = 0; i < boardDim; i++) {
+      for (let j = 0; j < boardDim; j++) {
+        if (board[i][j] === 0) {
+          for (let selectedLetter of ["S", "O"]) {
+            let moveValue = evaluateMove(board, i, j, selectedLetter);
             let move = {
               moveValue,
               i,
               j,
-              selectedLetter
-            }
-            possibleMoves.push(move)
-            if(moveValue === 0){
-              randomMoves.push(move)
+              selectedLetter,
+            };
+            possibleMoves.push(move);
+            if (moveValue === 0) {
+              randomMoves.push(move);
             }
           }
         }
       }
     }
-    possibleMoves.sort((m1, m2)=>m2.moveValue - m1.moveValue)
-    let nextMove = possibleMoves[0]
-    if(nextMove.moveValue === 0){
-      nextMove = randomItem(randomMoves)
+    possibleMoves.sort((m1, m2) => m2.moveValue - m1.moveValue);
+    let nextMove = possibleMoves[0];
+    if (nextMove.moveValue === 0) {
+      nextMove = randomItem(randomMoves);
     }
-    let nextMoveAction = putLetterIn(nextMove.i, nextMove.j, nextMove.selectedLetter, 1)
-    setTimeout(nextMoveAction, 200)
-  }
+    let nextMoveAction = putLetterIn(
+      nextMove.i,
+      nextMove.j,
+      nextMove.selectedLetter,
+      1
+    );
+    setTimeout(nextMoveAction, 200);
+  };
 
   return {
     state,

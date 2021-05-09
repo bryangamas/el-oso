@@ -18,6 +18,6 @@
   box-shadow: inset 0px 0px 5px rgb(100, 100, 100);
 }
 
-.Buttons__content:active {
+.Buttons__content-active{
   background-color: rgb(187, 187, 187);
 }

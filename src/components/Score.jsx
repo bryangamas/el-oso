@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import AppContext from "../contexts/AppContext";
-import "../styles/components/Score.css"
+import "../styles/components/Score.css";
 
 const Score = () => {
-  const {state: {points}} = useContext(AppContext)
+  const {
+    state: { points },
+  } = useContext(AppContext);
 
   return (
     <aside className="Score">
