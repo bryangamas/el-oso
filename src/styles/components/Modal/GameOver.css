@@ -1,0 +1,28 @@
+.GameOver * {
+  margin: 1rem auto;
+}
+
+.GameOver__result {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.GameOver button {
+  font-size: 2rem;
+  margin: .5rem;
+  padding: .5rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.GameOver__rematch {
+  background-color: darkgray;
+}
+
+.GameOver__cancel {
+  background-color: gray;
+}
+
+.GameOver__continue {
+  background-color: darkgray;
+}

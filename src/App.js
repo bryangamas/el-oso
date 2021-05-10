@@ -1,10 +1,11 @@
 import "./App.css";
+import AppContextProvider from "./providers/AppContextProvider";
 import Header from "./components/Header";
 import Score from "./components/Score";
 import Board from "./components/Board";
 import Buttons from "./components/Buttons";
 import Footer from "./components/Footer";
-import AppContextProvider from "./providers/AppContextProvider";
+import GameOver from "./components/modal/GameOver";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <Score />
       <Board />
       <Buttons />
-      <Footer/>
+      <Footer />
+      <GameOver />
     </AppContextProvider>
   );
 }

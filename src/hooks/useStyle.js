@@ -2,7 +2,7 @@ import { useContext } from "react";
 import AppContext from "../contexts/AppContext";
 
 const useStyle = () => {
-  const {state} = useContext(AppContext);
+  const { state } = useContext(AppContext);
   const { cellsWon, selectedLetter } = state;
 
   const cellClass = (cell, i, j) => {
@@ -20,10 +20,10 @@ const useStyle = () => {
   };
 
   const buttonClass = (letter) => {
-    return letter===selectedLetter?"Buttons__content-active":""
-  }
+    return letter === selectedLetter ? "Buttons__content-active" : "";
+  };
 
-  return {cellClass, buttonClass}
-}
+  return { cellClass, buttonClass };
+};
 
 export default useStyle;

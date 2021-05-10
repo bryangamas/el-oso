@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { calculatePoints, evaluateMove } from "../util/pointsUtils";
 import { randomItem, newMatrix } from "../util/arrayUtils";
+import { WINNER } from "../util/constantsUtil";
 
 const useStartGame = (boardDim = 6, firstTurn = 2) => {
   const initialState = {
@@ -10,26 +11,14 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
     turn: firstTurn,
     points: { 1: 0, 2: 0 },
     moves: 0,
+    winner: undefined,
   };
 
   const [state, setState] = useState(initialState);
 
-  useEffect(() => {
-    const checkFinishGame = () => {
-      let { moves } = state;
-      return moves === boardDim * boardDim ? true : false;
-    };
-
-    if (checkFinishGame()) {
-      console.log("Game over, hdp");
-      return;
-    }
-
-    if (state.turn === 1) {
-      computerMove();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state]);
+  const restart = () => {
+    setState(initialState)
+  }
 
   const changeSelectedLetter = (selectedLetter) => () => {
     setState({
@@ -107,10 +96,39 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
     setTimeout(nextMoveAction, 200);
   };
 
+  useEffect(() => {
+    const checkFinishGame = () => {
+      let { moves } = state;
+      return moves === boardDim * boardDim ? true : false;
+    };
+
+    if (checkFinishGame()) {
+      let { points } = state;
+      setTimeout(() => {
+        setState({
+          ...state,
+          winner:
+            points[1] > points[2]
+              ? WINNER.COMPUTADORA
+              : points[2] > points[1]
+              ? WINNER.HUMANO
+              : WINNER.EMPATE,
+        });
+      }, 200);
+      return;
+    }
+
+    if (state.turn === 1) {
+      computerMove();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.moves]);
+
   return {
     state,
     changeSelectedLetter,
     putLetterIn,
+    restart
   };
 };
 
