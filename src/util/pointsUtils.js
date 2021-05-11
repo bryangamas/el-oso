@@ -18,28 +18,15 @@ export const calculatePoints = ({ board, selectedLetter, turn }, i, j) => {
 
 export const evaluateMove = (board, i, j, selectedLetter) => {
   let completed = 0;
-  let half = 0;
   let { pairs, firstItem, secondItem } = getPairsFor(i, j, selectedLetter);
   for (let [[x1, y1], [x2, y2]] of pairs) {
     if (checkDimension(board, x1, y1, x2, y2)) {
-      let firstItemValue=0, secondItemValue=0;
-      if( board[x1][y1] === firstItem ){
-        firstItemValue = 2;
-      }else if( board[x1][y1] === 0 ){
-        firstItemValue = 1;
+      if( board[x1][y1] === firstItem && board[x2][y2] === secondItem ){
+        completed ++;
       }
-      if( board[x2][y2] === secondItem ){
-        secondItemValue = 2;
-      }else if( board[x2][y2] === 0 ){
-        secondItemValue = 1;
-      }
-
-      let value = firstItemValue + secondItemValue
-      if(value === 3) half++
-      else if(value === 4) completed++
     }
   }
-  return completed > 0 ? completed + half : -half;
+  return completed;
 };
 
 const getPairsFor = (i, j, letter) => {
