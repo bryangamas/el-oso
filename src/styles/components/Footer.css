@@ -8,3 +8,9 @@
   color: inherit;
   font-weight: bold;
 }
+
+@media (min-width: 600px) {
+  .Footer {
+    font-size: 3rem;
+  }
+}
