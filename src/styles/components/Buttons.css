@@ -24,10 +24,11 @@
 
 .Buttons {
   grid-area: buttons;
-  display: flex;
+  display: grid;
   width: 80%;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  row-gap: 1rem;
 }
 
 .Buttons__content {
