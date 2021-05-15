@@ -109,3 +109,9 @@
 .Board__cell-player-2 {
   background-color: turquoise;
 }
+
+@media (min-width: 600px) {
+  .Board__cell {
+    font-size: 5rem;
+  }
+}

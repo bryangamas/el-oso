@@ -42,3 +42,13 @@
 .Score__content__points::after {
   content: " pts";
 }
+
+@media (min-width: 600px) {
+  .Score__content__name {
+    font-size: 2rem;
+  }
+
+  .Score__content__points {
+    font-size: 3rem;
+  }
+}

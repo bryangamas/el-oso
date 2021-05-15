@@ -45,3 +45,16 @@
 .Buttons__content-active {
   background-color: rgb(187, 187, 187);
 }
+
+@media (min-width: 600px) {
+  .Buttons__content {
+    font-size: 6rem;
+    width: 12rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .Buttons__content {
+    width: 100%;
+  }
+}
