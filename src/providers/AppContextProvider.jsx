@@ -3,7 +3,7 @@ import AppContext from "../contexts/AppContext";
 import useStartGame from "../hooks/useStartGame";
 
 const AppContextProvider = ({ children }) => {
-  let startGame = useStartGame();
+  let startGame = useStartGame(6);
 
   return (
     <AppContext.Provider value={startGame}>{children}</AppContext.Provider>

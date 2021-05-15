@@ -1,0 +1,12 @@
+.GamePage {
+  display: grid;
+  grid-template-areas:
+    "score"
+    "board"
+    "board"
+    "board"
+    "buttons";
+  place-items: center;
+  row-gap: 1rem;
+  height: 100%;
+}
