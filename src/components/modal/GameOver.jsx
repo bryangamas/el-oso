@@ -14,9 +14,9 @@ const GameOver = () => {
     <Modal isOpen={winner}>
       <div className="GameOver">
         <p className="GameOver__result">
-          {winner === WINNER.COMPUTADORA
+          {winner === WINNER.COMPUTER
             ? "Te gané"
-            : winner === WINNER.HUMANO
+            : winner === WINNER.HUMAN
             ? "¡Ganaste!"
             : "Ha sido un empate"}
         </p>
@@ -31,12 +31,8 @@ const GameOver = () => {
         <button className="GameOver__cancel" type="button">
           Hemos terminado
         </button> */}
-        
-        <button
-          className="GameOver__continue"
-          onClick={restart}
-          type="button"
-        >
+
+        <button className="GameOver__continue" onClick={restart} type="button">
           Continuar
         </button>
       </div>

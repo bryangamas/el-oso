@@ -10,6 +10,7 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
     selectedLetter: undefined,
     turn: firstTurn,
     points: { 1: 0, 2: 0 },
+    lastEarnedPoints: 0,
     moves: 0,
     winner: undefined,
   };
@@ -17,8 +18,8 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
   const [state, setState] = useState(initialState);
 
   const restart = () => {
-    setState(initialState)
-  }
+    setState(initialState);
+  };
 
   const changeSelectedLetter = (selectedLetter) => () => {
     setState({
@@ -27,18 +28,20 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
     });
   };
 
-  const putLetterIn = (i, j, selectedLetter, player = 2) => () => {
-    let { board, turn } = state;
-    if (!selectedLetter) {
-      selectedLetter = state.selectedLetter;
-    }
-    if (selectedLetter) {
-      if (board[i][j] === 0 && turn === player) {
-        board[i][j] = selectedLetter;
-        checkEarnedPoints(i, j, selectedLetter);
+  const putLetterIn =
+    (i, j, selectedLetter, player = 2) =>
+    () => {
+      let { board, turn } = state;
+      if (!selectedLetter) {
+        selectedLetter = state.selectedLetter;
       }
-    }
-  };
+      if (selectedLetter) {
+        if (board[i][j] === 0 && turn === player) {
+          board[i][j] = selectedLetter;
+          checkEarnedPoints(i, j, selectedLetter);
+        }
+      }
+    };
 
   const checkEarnedPoints = (i, j, selectedLetter) => {
     let { turn, points, moves } = state;
@@ -56,6 +59,7 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
       cellsWon,
       turn,
       moves: moves + 1,
+      lastEarnedPoints: earnedPoints,
     });
   };
 
@@ -105,14 +109,15 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
     if (checkFinishGame()) {
       let { points } = state;
       setTimeout(() => {
+        let winner = WINNER.TIED_GAME;
+        if (points[1] > points[2]) {
+          winner = WINNER.COMPUTER;
+        } else if (points[2] > points[1]) {
+          winner = WINNER.HUMAN;
+        }
         setState({
           ...state,
-          winner:
-            points[1] > points[2]
-              ? WINNER.COMPUTADORA
-              : points[2] > points[1]
-              ? WINNER.HUMANO
-              : WINNER.EMPATE,
+          winner,
         });
       }, 200);
       return;
@@ -128,7 +133,7 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
     state,
     changeSelectedLetter,
     putLetterIn,
-    restart
+    restart,
   };
 };
 

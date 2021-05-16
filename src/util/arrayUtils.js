@@ -1,10 +1,8 @@
-export const randomNumber = (min, max) => {
-  return Math.floor(Math.random() * (max - min) ) + min;
-}
+import { randomNumber } from "./randomUtils";
 
 export const randomItem = (array) => {
-  return array[randomNumber(0, array.length-1)];
-}
+  return array[randomNumber(0, array.length - 1)];
+};
 
 export const checkDimension = (array, ...nums) => {
   let dim = array.length;

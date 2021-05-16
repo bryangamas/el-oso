@@ -15,9 +15,9 @@
   .GamePage {
     display: grid;
     grid-template-areas:
-      "board board board board score score"
-      "board board board board buttons buttons";
-    grid-template-columns: repeat(6, 1fr);
+      "board board score"
+      "board board buttons";
+    grid-template-columns: repeat(3, 1fr);
     place-items: center;
     height: 100%;
   }

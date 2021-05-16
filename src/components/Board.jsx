@@ -8,24 +8,6 @@ const Board = () => {
   const { state, putLetterIn } = useContext(AppContext);
   const { board } = state;
 
-  // return (
-  //   <main className="Board">
-  //     {board.map((row, i) => (
-  //       <div key={i} className="Board__row">
-  //         {row.map((cell, j) => (
-  //           <div
-  //             key={i + j}
-  //             className={`Board__cell ${cellClass(cell, i, j)}`}
-  //             onClick={putLetterIn(i, j)}
-  //           >
-  //             {cell === 0 ? "" : cell}
-  //           </div>
-  //         ))}
-  //       </div>
-  //     ))}
-  //   </main>
-  // );
-
   return (
     <main className="Board">
       {board.map((row, i) =>

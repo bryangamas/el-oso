@@ -4,11 +4,14 @@ import useStyle from "../hooks/useStyle";
 import "../styles/components/Buttons.css";
 import { LETTERS } from "../util/constantsUtil";
 
-const Button = ({letter}) => {
-  const {buttonClass}= useStyle();
+const Button = ({ letter }) => {
+  const { buttonClass } = useStyle();
   const { changeSelectedLetter } = useContext(AppContext);
   return (
-    <div className={`Buttons__content ${buttonClass(letter)}`} onClick={changeSelectedLetter(letter)}>
+    <div
+      className={`Buttons__content ${buttonClass(letter)}`}
+      onClick={changeSelectedLetter(letter)}
+    >
       {letter}
     </div>
   );
