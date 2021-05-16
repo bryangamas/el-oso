@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
-import { calculatePoints, evaluateMove } from "../util/pointsUtils";
-import { randomItem, newMatrix } from "../util/arrayUtils";
-import { WINNER } from "../util/constantsUtil";
+import { calculatePoints } from "../util/pointsUtils";
+import { newMatrix } from "../util/arrayUtils";
+import { DIFFICULTY, WINNER } from "../util/constantsUtil";
+import useDifficulty from "./useDifficulty";
 
-const useStartGame = (boardDim = 6, firstTurn = 2) => {
+const useStartGame = (
+  boardDim = 6,
+  firstTurn = 2,
+  difficulty = DIFFICULTY.EASY
+) => {
   const initialState = {
     board: newMatrix(boardDim),
     cellsWon: newMatrix(boardDim),
@@ -16,6 +21,7 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
   };
 
   const [state, setState] = useState(initialState);
+  const { nextComputerMove } = useDifficulty(difficulty);
 
   const restart = () => {
     setState(initialState);
@@ -63,43 +69,6 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
     });
   };
 
-  const computerMove = () => {
-    let { board } = state;
-    let possibleMoves = [];
-    let randomMoves = [];
-    for (let i = 0; i < boardDim; i++) {
-      for (let j = 0; j < boardDim; j++) {
-        if (board[i][j] === 0) {
-          for (let selectedLetter of ["S", "O"]) {
-            let moveValue = evaluateMove(board, i, j, selectedLetter);
-            let move = {
-              moveValue,
-              i,
-              j,
-              selectedLetter,
-            };
-            possibleMoves.push(move);
-            if (moveValue === 0) {
-              randomMoves.push(move);
-            }
-          }
-        }
-      }
-    }
-    possibleMoves.sort((m1, m2) => m2.moveValue - m1.moveValue);
-    let nextMove = possibleMoves[0];
-    if (nextMove.moveValue === 0) {
-      nextMove = randomItem(randomMoves);
-    }
-    let nextMoveAction = putLetterIn(
-      nextMove.i,
-      nextMove.j,
-      nextMove.selectedLetter,
-      1
-    );
-    setTimeout(nextMoveAction, 200);
-  };
-
   useEffect(() => {
     const checkFinishGame = () => {
       let { moves } = state;
@@ -124,7 +93,15 @@ const useStartGame = (boardDim = 6, firstTurn = 2) => {
     }
 
     if (state.turn === 1) {
-      computerMove();
+      let { board, lastEarnedPoints } = state;
+      let nextMove = nextComputerMove(board, lastEarnedPoints);
+      let nextMoveAction = putLetterIn(
+        nextMove.i,
+        nextMove.j,
+        nextMove.selectedLetter,
+        1
+      );
+      setTimeout(nextMoveAction, 200);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.moves]);

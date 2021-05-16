@@ -7,26 +7,28 @@ export const calculateComputerMove = (board, hitPercent) => {
   let possibleMoves = [];
   let randomMoves = [];
   board.forEach((row, i) => {
-    row.forEach((_cell, j) => {
-      LETTERS.forEach((selectedLetter) => {
-        let moveValue = evaluateMove(board, i, j, selectedLetter);
-        processElement(
-          {
-            i,
-            j,
-            selectedLetter,
-            moveValue,
-          },
-          possibleMoves,
-          randomMoves
-        );
-      });
+    row.forEach((cell, j) => {
+      if (!cell) {
+        Object.values(LETTERS).forEach((selectedLetter) => {
+          let moveValue = evaluateMove(board, i, j, selectedLetter);
+          processElement(
+            {
+              i,
+              j,
+              selectedLetter,
+              moveValue,
+            },
+            possibleMoves,
+            randomMoves
+          );
+        });
+      }
     });
   });
   possibleMoves.sort((m1, m2) => m2.moveValue - m1.moveValue);
   let nextMove = possibleMoves[0];
   let playRandomly =
-    nextMove.moveValue === 0 || randomNumber(1, 100) < hitPercent;
+    nextMove.moveValue === 0 || randomNumber(1, 100) >= hitPercent;
   if (playRandomly) {
     nextMove = randomItem(randomMoves);
   }
