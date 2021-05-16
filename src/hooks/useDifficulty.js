@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HIT_REDUCTION } from "../util/constantsUtil";
-import { calculateComputerMove } from "../util/computerStrategiesUtil";
+import { calculateComputerMove } from "../util/computerStrategieUtil";
 
 const useDifficulty = (difficulty) => {
   const [hitPercent, setHitPercent] = useState(100);

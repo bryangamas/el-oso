@@ -1,6 +1,7 @@
 import { randomItem } from "./arrayUtils";
 import { LETTERS } from "./constantsUtil";
 import { evaluateMove } from "./pointsUtils";
+import { randomNumber } from "./randomUtils";
 
 export const calculateComputerMove = (board, hitPercent) => {
   let possibleMoves = [];
@@ -24,7 +25,9 @@ export const calculateComputerMove = (board, hitPercent) => {
   });
   possibleMoves.sort((m1, m2) => m2.moveValue - m1.moveValue);
   let nextMove = possibleMoves[0];
-  if (nextMove.moveValue === 0) {
+  let playRandomly =
+    nextMove.moveValue === 0 || randomNumber(1, 100) < hitPercent;
+  if (playRandomly) {
     nextMove = randomItem(randomMoves);
   }
   return nextMove;
