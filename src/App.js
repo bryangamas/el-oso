@@ -1,21 +1,14 @@
 import "./App.css";
 import AppContextProvider from "./providers/AppContextProvider";
-import Header from "./components/Header";
-import Score from "./components/Score";
-import Board from "./components/Board";
-import Buttons from "./components/Buttons";
-import Footer from "./components/Footer";
-import GameOver from "./components/modal/GameOver";
+import Layout from "./components/Layout";
+import GamePage from "./pages/game";
 
 function App() {
   return (
     <AppContextProvider>
-      <Header />
-      <Score />
-      <Board />
-      <Buttons />
-      <Footer />
-      <GameOver />
+      <Layout>
+        <GamePage />
+      </Layout>
     </AppContextProvider>
   );
 }

@@ -1,12 +1,16 @@
 .Footer {
   font-size: 2rem;
-  text-align: center;
   color: lightgray;
-  margin: 1.5rem auto;
 }
 
 .Footer a {
   text-decoration: none;
   color: inherit;
   font-weight: bold;
+}
+
+@media (min-width: 600px) {
+  .Footer {
+    font-size: 3rem;
+  }
 }
