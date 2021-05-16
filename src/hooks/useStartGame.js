@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { calculatePoints } from "../util/pointsUtils";
 import { newMatrix } from "../util/arrayUtils";
-import { DIFFICULTY, WINNER } from "../util/constantsUtil";
+import { DIFFICULTY, TIME_OUT_MILIS, WINNER } from "../util/constantsUtil";
 import useDifficulty from "./useDifficulty";
 
 const useStartGame = (
@@ -88,7 +88,7 @@ const useStartGame = (
           ...state,
           winner,
         });
-      }, 200);
+      }, TIME_OUT_MILIS);
       return;
     }
 
@@ -101,7 +101,7 @@ const useStartGame = (
         nextMove.selectedLetter,
         1
       );
-      setTimeout(nextMoveAction, 200);
+      setTimeout(nextMoveAction, TIME_OUT_MILIS);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.moves]);

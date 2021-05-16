@@ -3,10 +3,7 @@ export const LETTERS = {
   O: "O",
 };
 
-export const PLAYERS = {
-  1: "Computadora",
-  2: "Humano",
-};
+export const TIME_OUT_MILIS = 300;
 
 export const WINNER = {
   COMPUTER: 1,
